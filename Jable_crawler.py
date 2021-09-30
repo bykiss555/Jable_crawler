@@ -51,6 +51,7 @@ def getinfo(str):
         return info
     except:
         print(str,'该番号不存在，请检查该是否正确')
+        return False
 
 def save_img(info,fh):                      #保存预览图
     url = info['preimg']
@@ -88,11 +89,14 @@ def main():
     fh = input('请输入需要查询的番号————>>>>>')
     if testping():
         info = getinfo(str=fh)
-        print(info)
-        save_img(info,fh)
+        if info:
+            print(info)
+            print(info['m3u8_url'])
+            save_img(info, fh)
+        else:
+            exit()
     else:
         print('请检查网络是否正常，代理是否开启')
-    print(info['m3u8_url'])
 
 if __name__ == '__main__':
     main()
